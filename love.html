@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Love You 💖</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      color: #fff;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    #yes {
+      background-color: #ff4081;
+      color: white;
+    }
+
+    #yes:hover {
+      background-color: #ff80ab;
+      transform: scale(1.1);
+    }
+
+    #no {
+      background-color: #fff;
+      color: #ff4081;
+    }
+
+    #no:hover {
+      background-color: #f8bbd0;
+      transform: scale(1.1);
+    }
+
+    /* Floating hearts animation */
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: float 5s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-600px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="message">I love you 💖</h1>
+
+  <div class="buttons" id="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+
+  <script>
+    const message = document.getElementById("message");
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const buttonsDiv = document.getElementById("buttons");
+    let noClickCount = 0;
+
+    yesBtn.addEventListener("click", () => {
+      message.innerText = "Thank you very muchhh!!! 💕";
+      buttonsDiv.style.display = "none";
+      createHearts();
+    });
+
+    noBtn.addEventListener("click", () => {
+      noClickCount++;
+      if (noClickCount === 1) {
+        message.innerText = "Please click the Yes button 🙏";
+      } else if (noClickCount === 2) {
+        message.innerText = "I said you to enter Yes, plz say Yes 😭😭";
+      } else {
+        moveNoButton();
+      }
+    });
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    // Create floating hearts when "Yes" is clicked
+    function createHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerText = "💖";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+    }
+  </script>
+
+</body>
+</html>
